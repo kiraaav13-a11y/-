@@ -1,5 +1,5 @@
 const MAX_IMAGES = 4;
-const MAX_IMAGE_BYTES = 3 * 1024 * 1024;
+const MAX_IMAGE_BYTES = 700 * 1024;
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
