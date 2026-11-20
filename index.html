@@ -45,7 +45,7 @@ return r}
 async function fileAsDataURL(file){return new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(reader.result);reader.onerror=reject;reader.readAsDataURL(file)})}
 $('#analyzeBtn').onclick=async()=>{let q=$('#question').value.trim(),c=$('#context').value.trim();if(!q){alert('Сначала напиши свой вопрос ♡');return}
 const btn=$('#analyzeBtn'),files=[...$('#images').files];if(files.length>4){alert('Можно прикрепить не больше 4 изображений за раз.');return}
-if(files.some(f=>f.size>3*1024*1024)){alert('Каждое изображение должно быть меньше 3 МБ.');return}
+if(files.some(f=>f.size>700*1024)){alert('Каждое изображение должно быть меньше 700 КБ.');return}
 btn.disabled=true;btn.textContent='MIMI анализирует ситуацию…';
 try{const images=await Promise.all(files.map(fileAsDataURL));const response=await fetch('/api/analyze',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question:q,context:c,category,style,persona,images})});
 const payload=await response.json();if(!response.ok)throw new Error(payload.error||'Не удалось получить ответ от AI-сервиса.');
